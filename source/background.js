@@ -1,7 +1,7 @@
 
 var updateBadge = function( items ){
-    chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-    chrome.browserAction.setBadgeText({text: String(items.cleaned)});
+    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 255, 255] });
+    chrome.browserAction.setBadgeText( {text: String(items.cleaned)} );
 }
 
 chrome.runtime.onMessage.addListener(

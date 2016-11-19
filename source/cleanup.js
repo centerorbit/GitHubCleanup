@@ -1,8 +1,7 @@
 
-cleanedNow = 0;
-
-do {
+var runCleanup = function(){
     cleaned = 0;
+
     [].forEach.call(
         document.getElementsByClassName("comment-body"),
         function(element){
@@ -21,25 +20,45 @@ do {
             }
         }
     );
-    console.log("Cleaned up "+cleaned+" comments.");
-    cleanedNow += cleaned;
     
-} while ( cleaned > 0 );
+    return cleaned;
+}
 
+var saveAndDone = function( totalCleaned ){
+    console.log("Cleaned up "+totalCleaned+" comments.");
 
-chrome.storage.sync.get(["key"], function(items){
-    items = items.key;
-    console.log(JSON.stringify(items));
+    chrome.storage.sync.get(["key"], function(items){
+        items = items.key;
 
-    if( items.cleaned == null ){
-        //console.log("cleaned was null, initializing");
-        items.cleaned = 0;
-    }
+        if( items.cleaned == null ){
+            //console.log("cleaned was null, initializing");
+            items.cleaned = 0;
+        }
 
-    items.cleaned += cleanedNow;
+        items.cleaned += totalCleaned;
 
-    chrome.storage.sync.set({ "key": items }, function(){ 
-        //Send a message to update the badge (look in background.js now)
-        chrome.runtime.sendMessage({ msg: "updateBadge", data: items });
+        chrome.storage.sync.set({ "key": items }, function(){ 
+            //Send a message to update the badge (look in background.js now)
+            chrome.runtime.sendMessage({ msg: "updateBadge", data: items });
+        });
     });
-});
+}
+
+
+
+var timeout = 100;
+var instanceCleanCount = 0;
+
+var cleanupLoop = function(){
+    cleaned = runCleanup( );
+    instanceCleanCount += cleaned;
+
+    if( cleaned > 0 ){
+        timeout = timeout * 2;
+        setTimeout(function(){cleanupLoop();}, timeout);
+    }
+    else {
+        saveAndDone( instanceCleanCount );
+    }
+}
+cleanupLoop( );

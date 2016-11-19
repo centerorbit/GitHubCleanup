@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Clean GitHub Comments",
-    "version": "1.0",
+    "name": "GitHubCleanup",
+    "version": "1.5",
     "description": "This extension removes some of the unnecessary comments in the GitHub issue section, such as '+1' and 'Thanks!'",
     "icons": {
         "128": "icon_128.png"

@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "GitHubCleanup",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "author": "Andrew LeTourneau, centerorbit@gmail.com",
     "description": "Removes unnecessary GitHub Issue comments (+1, thanks, and even 👍). OSS https://github.com/centerorbit/GitHubCleanup",
     "icons": {

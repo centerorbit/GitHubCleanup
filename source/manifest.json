@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Clean Github Comments",
+    "version": "1.0",
+    "description": "This extension cleans up the unnecessary comments in github issues, such as +1 and Thanks!",
+    "icons": {
+        "128": "icon_128.png"
+    },
+    "permissions": [
+        "tabs",
+        "*://github.com/*/issues/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://github.com/*/issues/*"
+            ],
+            "js": [
+                "cleanup.js"
+            ]
+        }
+    ]
+}

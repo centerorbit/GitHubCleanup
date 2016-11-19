@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "GitHubCleanup",
-    "version": "1.6",
-    "description": "This extension removes some of the unnecessary comments in the GitHub issue section, such as '+1' and 'Thanks!'",
+    "version": "1.6.1",
+    "description": "This extension removes some of the unnecessary comments in the GitHub issue section, such as: '+1', 'thanks' and even 👍. Now open source! https://github.com/centerorbit/GitHubCleanup",
     "icons": {
         "128": "icon_128.png"
     },

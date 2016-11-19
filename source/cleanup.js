@@ -30,9 +30,8 @@ var saveAndDone = function( totalCleaned ){
     chrome.storage.sync.get(["key"], function(items){
         items = items.key;
 
-        if( items.cleaned == null ){
-            //console.log("cleaned was null, initializing");
-            items.cleaned = 0;
+        if( items == undefined || items.cleaned == undefined || items.cleaned){
+            items = {cleaned : 0};
         }
 
         items.cleaned += totalCleaned;

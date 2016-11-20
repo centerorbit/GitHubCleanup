@@ -30,7 +30,7 @@ var saveAndDone = function( totalCleaned ){
     chrome.storage.sync.get(["key"], function(items){
         items = items.key;
 
-        if( items == undefined || items.cleaned == undefined || items.cleaned){
+        if( items == undefined || ! Number.isInteger(items.cleaned) ){
             items = {cleaned : 0};
         }
 

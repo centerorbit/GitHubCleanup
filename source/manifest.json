@@ -9,13 +9,13 @@
     },
     "permissions": [
         "tabs",
-        "*://github.com/*/issues/*",
+        "*://github.com/*",
         "storage"
     ],
     "content_scripts": [
         {
             "matches": [
-                "*://github.com/*/issues/*"
+                "*://github.com/*"
             ],
             "js": [
                 "cleanup.js"

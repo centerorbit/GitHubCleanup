@@ -8,11 +8,11 @@ var runCleanup = function(){
             toInspect = element.innerText;
             if( toInspect.indexOf("+1") != -1 
             ||  toInspect.indexOf("👍") != -1
-            ||  toInspect.toLowerCase().indexOf("me to") != -1
+            ||  toInspect.toLowerCase().indexOf("me to") != -1 //purposefully not doing 'too', for those with bad grammar
             ||  toInspect.toLowerCase().indexOf("thank") != -1 
             ) {
                 words = toInspect.split(' ').length;
-                if (words < 7){
+                if (words < 5){
                     child = element.parentElement.parentElement.parentElement;
                     child.parentElement.removeChild(child);
                     cleaned++;
@@ -50,14 +50,17 @@ var instanceCleanCount = 0;
 
 var cleanupLoop = function(){
     cleaned = runCleanup( );
-    instanceCleanCount += cleaned;
 
-    if( cleaned > 0 ){
-        timeout = timeout * 2;
-        setTimeout(function(){cleanupLoop();}, timeout);
+    if( cleaned == 0 ){
+        if(timeout < 1000){
+            timeout = timeout * 2;
+        }
     }
     else {
-        saveAndDone( instanceCleanCount );
+        timeout = 100;
+        saveAndDone( cleaned );
     }
+
+    setTimeout(function(){cleanupLoop();}, timeout);
 }
 cleanupLoop( );
